@@ -214,26 +214,6 @@ A Postman collection is available with:
 
 ---
 
-## ⚙️ Setup Instructions
-1. Install **Node.js** & **MongoDB**  
-2. Clone the repository  
-3. Run `npm install`  
-4. Create a `.env` file with required variables  
-5. Start development server:
-   ```bash
-   npm run dev
-   ```
-6. Test APIs using **Postman**
 
----
-
-## 🛠️ Technologies Used
-- **Node.js**  
-- **Express.js**  
-- **MongoDB + Mongoose**  
-- **JWT** (Authentication)  
-- **bcryptjs** (Password hashing)  
-
----
 
 📌 **Tip:** Always start with **Register/Login** to obtain a JWT token before testing private endpoints.
