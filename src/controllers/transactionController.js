@@ -49,63 +49,57 @@ const getTransaction = asyncHandler(async (req, res) => {
 });
 const createTransaction = asyncHandler(async (req, res) => {
   try {
-      console.log('=== TRANSACTION CREATE REQUEST ===');
-    console.log('Request body received:', JSON.stringify(req.body, null, 2));
-    console.log('Products value:', req.body.products);
-    console.log('Products type:', typeof req.body.products);
-    console.log('Is products array:', Array.isArray(req.body.products));
-    console.log('User making request:', req.user._id);
+    console.log("=== TRANSACTION CREATE REQUEST ===");
+    console.log("Request body received:", JSON.stringify(req.body, null, 2));
+    console.log("Products value:", req.body.products);
+    console.log("Products type:", typeof req.body.products);
+    console.log("Is products array:", Array.isArray(req.body.products));
+    console.log("User making request:", req.user._id);
     const { type, customerId, vendorId, products, date } = req.body;
 
-    // ===== ADD VALIDATION HERE =====
-    // Check if products exists and is an array
     if (!products || !Array.isArray(products)) {
-      return res.status(400).json({ 
-        message: 'Products must be provided as an array' 
+      return res.status(400).json({
+        message: "Products must be provided as an array",
       });
     }
 
-    // Check if products array is empty
     if (products.length === 0) {
-      return res.status(400).json({ 
-        message: 'Products array cannot be empty' 
+      return res.status(400).json({
+        message: "Products array cannot be empty",
       });
     }
 
-    // Validate required fields based on transaction type
-    if (type === 'sale' && !customerId) {
-      return res.status(400).json({ 
-        message: 'customerId is required for sales' 
+    if (type === "sale" && !customerId) {
+      return res.status(400).json({
+        message: "customerId is required for sales",
       });
     }
 
-    if (type === 'purchase' && !vendorId) {
-      return res.status(400).json({ 
-        message: 'vendorId is required for purchases' 
+    if (type === "purchase" && !vendorId) {
+      return res.status(400).json({
+        message: "vendorId is required for purchases",
       });
     }
 
-    // Validate each product item
     for (const item of products) {
       if (!item.productId || !item.quantity || !item.price) {
-        return res.status(400).json({ 
-          message: 'Each product must have productId, quantity, and price' 
+        return res.status(400).json({
+          message: "Each product must have productId, quantity, and price",
         });
       }
 
       if (item.quantity < 1) {
-        return res.status(400).json({ 
-          message: 'Quantity must be at least 1' 
+        return res.status(400).json({
+          message: "Quantity must be at least 1",
         });
       }
 
       if (item.price < 0) {
-        return res.status(400).json({ 
-          message: 'Price cannot be negative' 
+        return res.status(400).json({
+          message: "Price cannot be negative",
         });
       }
     }
-    // ===== END OF VALIDATION =====
 
     let totalAmount = 0;
     for (const item of products) {
@@ -138,11 +132,9 @@ const createTransaction = asyncHandler(async (req, res) => {
         product.stock += item.quantity;
       } else if (type === "sale") {
         if (product.stock < item.quantity) {
-          return res
-            .status(400)
-            .json({ 
-              message: `Insufficient stock for ${product.name}. Available: ${product.stock}, Requested: ${item.quantity}` 
-            });
+          return res.status(400).json({
+            message: `Insufficient stock for ${product.name}. Available: ${product.stock}, Requested: ${item.quantity}`,
+          });
         }
         product.stock -= item.quantity;
       }

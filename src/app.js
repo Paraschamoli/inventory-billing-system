@@ -21,8 +21,7 @@ import bodyParser from "body-parser";
 
 const app = express();
 
-// ===== CRITICAL: Middleware ORDER matters! =====
-// 1. First, body parsing middleware
+
 app.use((req, res, next) => {
   console.log('\n=== INCOMING REQUEST ===');
   console.log('Method:', req.method);
@@ -53,7 +52,7 @@ app.use((req, res, next) => {
   });
 });
 
-app.use(express.json({ limit: "16kb" }));  // UNCOMMENT THIS LINE
+app.use(express.json({ limit: "16kb" }));  
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -63,17 +62,15 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cors());
 app.use(cookieParser());
 
-// 3. Then your routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/reports", reportRoutes);
 
-// 4. Error handling middleware (should be last)
+
 app.use(errorHandler);
 
-// Connect to MongoDB
 connectDB()
   .then(() => {
     app.listen(process.env.PORT || 8000, () => {
