@@ -2,8 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-
-
 // Load environment variables
 dotenv.config({
   path: "./.env",
@@ -18,24 +16,61 @@ import reportRoutes from "./routes/reports.js";
 
 // Import middleware
 import errorHandler from "./middleware/errorHandler.js";
-
 import connectDB from "./config/database.js";
+import bodyParser from "body-parser";
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json({ limit: "16kb" }));
+// ===== CRITICAL: Middleware ORDER matters! =====
+// 1. First, body parsing middleware
+app.use((req, res, next) => {
+  console.log('\n=== INCOMING REQUEST ===');
+  console.log('Method:', req.method);
+  console.log('URL:', req.url);
+  console.log('Headers:', req.headers);
+  console.log('Content-Type:', req.get('Content-Type'));
+  
+  // Store the original send method
+  const originalSend = res.send;
+  
+  // Capture the request body
+  let requestBody = '';
+  req.on('data', (chunk) => {
+    requestBody += chunk.toString();
+  });
+  
+  req.on('end', () => {
+    console.log('Raw request body:', requestBody);
+    try {
+      const parsedBody = JSON.parse(requestBody);
+      console.log('Parsed body:', parsedBody);
+      req.body = parsedBody; // Manually set the body
+    } catch (e) {
+      console.log('Failed to parse body as JSON');
+      req.body = {};
+    }
+    next();
+  });
+});
+
+app.use(express.json({ limit: "16kb" }));  // UNCOMMENT THIS LINE
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
+
+app.use(cors());
 app.use(cookieParser());
-// Routes
+
+// 3. Then your routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/reports", reportRoutes);
 
-// Error handling middleware
+// 4. Error handling middleware (should be last)
 app.use(errorHandler);
 
 // Connect to MongoDB
