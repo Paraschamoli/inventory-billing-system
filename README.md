@@ -22,6 +22,18 @@ Built with **Node.js, Express, and MongoDB**.
 - **Password Hashing:** bcryptjs  
 
 ---
+# Inventory & Billing Management System
+
+A complete backend system for small businesses to manage products, customers, vendors, and transactions with authentication and reporting features.
+
+## 🚀 Live Deployment
+
+The API is now live and available at:  
+**https://inventory-billing-system-yc3i.onrender.com**
+
+### Base URL
+**https://inventory-billing-system-yc3i.onrender.com/api**
+
 
 ## ⚙️ Installation
 
@@ -197,22 +209,42 @@ Built with **Node.js, Express, and MongoDB**.
 { "message": "Server error description" }
 ```
 
----
+## 🚀 API Testing with Postman
 
-## 🧪 Postman Collection
-A Postman collection is available with:
-- Pre-configured requests  
-- Environment variables  
-- Automatic token handling  
-- Example request bodies  
+A complete Postman collection is included for testing all API endpoints.
 
-**Steps:**
-1. Import collection JSON into Postman  
-2. Set base URL variable  
-3. Register/Login to get token  
-4. Token is automatically used in subsequent requests  
+### 📋 Postman Collection
+The collection file is located at: `Inventory-Billing-System.postman_collection.json`
 
----
+### 🔧 Import Instructions
+1. Open Postman
+2. Click **Import** → **Upload Files**
+3. Select the `Inventory-Billing-System.postman_collection.json` file
+4. Click **Import**
+
+### 🛠 Setup for Testing
+1. **Set Environment Variables:**
+   - Create a new environment in Postman
+   - Add variable: `baseUrl` = `https://inventory-billing-system-yc3i.onrender.com/api`
+
+2. **Authentication Flow:**
+   - Start with **Register User** to create an account
+   - Use **Login User** to get JWT token
+   - Token is automatically stored for authenticated requests
+
+### 📚 Collection Includes
+- ✅ Authentication endpoints (Register, Login, Profile)
+- ✅ Complete CRUD operations for Products
+- ✅ Customer/Vendor management endpoints  
+- ✅ Transaction creation and management
+- ✅ Inventory and sales reports
+- ✅ Pre-configured request examples
+
+### ⚡ Testing Tips
+- All private endpoints require authentication
+- Start with product/contact creation before transactions
+- Check stock levels before creating sales transactions
+- Use reports to verify data consistency
 
 
 
