@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "0dd2d0ea-fb8f-4c4d-b7e9-449739cbda73",
+		"name": "Inventory & Billing System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37976155"
+	},
+	"item": [
+		{
+			"name": "Authentication req",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"businessName\": \"Test Business\",\r\n    \"email\": \"test@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Management Requests",
+			"item": [
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Laptop\",\r\n    \"description\": \"High performance gaming laptop\",\r\n    \"price\": 1200,\r\n    \"stock\": 15,\r\n    \"category\": \"Electronics\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Laptop\",\r\n    \"description\": \"High performance gaming laptop\",\r\n    \"price\": 1200,\r\n    \"stock\": 15,\r\n    \"category\": \"Electronics\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/68bcec8a5b83d2878da4e7c9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"68bcec8a5b83d2878da4e7c9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gaming Laptop\",\r\n    \"price\": 1300,\r\n    \"stock\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/68ba934b8667b17b7dae4c8c",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"68ba934b8667b17b7dae4c8c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Stock",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"operation\": \"increase\",\r\n    \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/68ba934b8667b17b7dae4c8c/stock",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"68ba934b8667b17b7dae4c8c",
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/68ba934b8667b17b7dae4c8c",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"68ba934b8667b17b7dae4c8c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact Endpoints",
+			"item": [
+				{
+					"name": "Get All Contacts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Laptop\",\r\n    \"description\": \"High performance gaming laptop\",\r\n    \"price\": 1200,\r\n    \"stock\": 15,\r\n    \"category\": \"Electronics\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Contact",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"phone\": \"1234567890\",\r\n  \"email\": \"john@example.com\",\r\n  \"address\": \"123 Main St, City, State\",\r\n  \"type\": \"customer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Contact",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"phone\": \"1234567890\",\r\n  \"email\": \"john@example.com\",\r\n  \"address\": \"123 Main St, City, State\",\r\n  \"type\": \"customer\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/contacts/68bceecd5b83d2878da4e7da",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"contacts",
+								"68bceecd5b83d2878da4e7da"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Smith\",\r\n  \"phone\": \"0987654321\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/contacts/68bceecd5b83d2878da4e7da",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"contacts",
+								"68bceecd5b83d2878da4e7da"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Smith\",\r\n  \"phone\": \"0987654321\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/contacts/68bceecd5b83d2878da4e7da",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"contacts",
+								"68bceecd5b83d2878da4e7da"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction Endpoints",
+			"item": [
+				{
+					"name": "Get All Transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"phone\": \"1234567890\",\r\n  \"email\": \"john@example.com\",\r\n  \"address\": \"123 Main St, City, State\",\r\n  \"type\": \"customer\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"sale\",\r\n  \"customerId\": \"68bceecd5b83d2878da4e7da\",\r\n  \"products\": [\r\n    {\r\n      \"productId\": \"68bcec8a5b83d2878da4e7c9\",\r\n      \"quantity\": 5,\r\n      \"price\": 13000\r\n    }\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Transaction",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"sale\",\r\n  \"customerId\": \"68bceecd5b83d2878da4e7da\",\r\n  \"products\": [\r\n    {\r\n      \"productId\": \"68bcec8a5b83d2878da4e7c9\",\r\n      \"quantity\": 5,\r\n      \"price\": 13000\r\n    }\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/transactions/68bcf714ad1f2c626da9a159",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"transactions",
+								"68bcf714ad1f2c626da9a159"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report Endpoints",
+			"item": [
+				{
+					"name": "Inventory Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"sale\",\r\n  \"customerId\": \"68bceecd5b83d2878da4e7da\",\r\n  \"products\": [\r\n    {\r\n      \"productId\": \"68bcec8a5b83d2878da4e7c9\",\r\n      \"quantity\": 5,\r\n      \"price\": 13000\r\n    }\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reports/inventory",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reports",
+								"inventory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"sale\",\r\n  \"customerId\": \"68bceecd5b83d2878da4e7da\",\r\n  \"products\": [\r\n    {\r\n      \"productId\": \"68bcec8a5b83d2878da4e7c9\",\r\n      \"quantity\": 5,\r\n      \"price\": 13000\r\n    }\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reports/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reports",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contact Transaction History",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"sale\",\r\n  \"customerId\": \"68bceecd5b83d2878da4e7da\",\r\n  \"products\": [\r\n    {\r\n      \"productId\": \"68bcec8a5b83d2878da4e7c9\",\r\n      \"quantity\": 5,\r\n      \"price\": 13000\r\n    }\r\n  ]\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/reports/contacts/68bceecd5b83d2878da4e7da/transactions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"reports",
+								"contacts",
+								"68bceecd5b83d2878da4e7da",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000/api",
+			"type": "string"
+		}
+	]
+}
